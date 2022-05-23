@@ -2379,10 +2379,10 @@ components:
             - stateHash
             - beneficiaryAddress
             - feeMultiplier
-            - totalSupply
-            - feeToPay
-            - inflation
             - collectedEpochFees
+            - feeToPay
+            - totalSupply
+            - inflation
           properties:
             height:
               $ref: '#/components/schemas/Height'
@@ -2408,13 +2408,13 @@ components:
               $ref: '#/components/schemas/Address'
             feeMultiplier:
               $ref: '#/components/schemas/BlockFeeMultiplier'
-            totalSupply:
+            collectedEpochFees:
               $ref: '#/components/schemas/Amount'
             feeToPay:
               $ref: '#/components/schemas/Amount'
-            inflation:
+            totalSupply:
               $ref: '#/components/schemas/Amount'
-            collectedEpochFees:
+            inflation:
               $ref: '#/components/schemas/Amount'
     BlockInfoDTO:
       type: object
