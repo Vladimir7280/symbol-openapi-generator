@@ -2383,6 +2383,7 @@ components:
             - feeToPay
             - totalSupply
             - inflation
+            - inflationMultiplier
           properties:
             height:
               $ref: '#/components/schemas/Height'
@@ -2415,6 +2416,8 @@ components:
             totalSupply:
               $ref: '#/components/schemas/Amount'
             inflation:
+              $ref: '#/components/schemas/Amount'
+            inflationMultiplier:
               $ref: '#/components/schemas/Amount'
     BlockInfoDTO:
       type: object
@@ -3457,6 +3460,7 @@ components:
         - 16721
         - 16977
         - 16724
+        - 16726
       description: |
         Type of transaction:
         * 0x414C (16716 decimal) - AccountKeyLinkTransaction.
@@ -3483,6 +3487,7 @@ components:
         * 0x4151 (16721 decimal) - MosaicGlobalRestrictionTransaction.
         * 0x4251 (16977 decimal) - MosaicAddressRestrictionTransaction.
         * 0x4154 (16724 decimal) - TransferTransaction.
+        * 0x4156 (16726 decimal) - PriceTransaction.
     AnnounceTransactionInfoDTO:
       type: object
       required:
@@ -3540,6 +3545,7 @@ components:
             - $ref: '#/components/schemas/EmbeddedMosaicGlobalRestrictionTransactionDTO'
             - $ref: '#/components/schemas/EmbeddedMosaicAddressRestrictionTransactionDTO'
             - $ref: '#/components/schemas/EmbeddedTransferTransactionDTO'
+            - $ref: '#/components/schemas/EmbeddedPriceTransactionDTO'
     EmbeddedTransactionMetaDTO:
       type: object
       required:
@@ -3654,6 +3660,8 @@ components:
             - $ref: '#/components/schemas/EmbeddedMosaicAddressRestrictionTransactionDTO'
             - $ref: '#/components/schemas/TransferTransactionDTO'
             - $ref: '#/components/schemas/EmbeddedTransferTransactionDTO'
+            - $ref: '#/components/schemas/PriceTransactionDTO'
+            - $ref: '#/components/schemas/EmbeddedPriceTransactionDTO'
     TransactionMetaDTO:
       type: object
       required:
@@ -4165,6 +4173,30 @@ components:
       allOf:
         - $ref: '#/components/schemas/EmbeddedTransactionDTO'
         - $ref: '#/components/schemas/NamespaceMetadataTransactionBodyDTO'
+    EmbeddedPriceTransactionDTO:
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/EmbeddedTransactionDTO'
+        - $ref: '#/components/schemas/PriceTransactionBodyDTO'
+    PriceTransactionBodyDTO:
+      type: object
+      required:
+        - blockHeight
+        - highPrice
+        - lowPrice
+      properties:
+        blockHeight:
+          $ref: '#/components/schemas/UInt64'
+        highPrice:
+          $ref: '#/components/schemas/UInt64'
+        lowPrice:
+          $ref: '#/components/schemas/UInt64'
+    PriceTransactionDTO:
+      type: object
+      description: Price Transaction.
+      allOf:
+        - $ref: '#/components/schemas/TransactionDTO'
+        - $ref: '#/components/schemas/PriceTransactionBodyDTO'
     MetadataEntryDTO:
       type: object
       required:
